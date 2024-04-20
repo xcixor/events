@@ -18,14 +18,14 @@ export async function POST(
       );
     }
 
-    // const duplicate = await db.attendee.findFirst({ where: { email: email } });
+    const duplicate = await db.attendee.findFirst({ where: { email: email } });
 
-    // if (duplicate) {
-    //   return NextResponse.json(
-    //     { message: "You have already registered to this event." },
-    //     { status: 409 },
-    //   );
-    // }
+    if (duplicate) {
+      return NextResponse.json(
+        { message: "You have already registered to this event." },
+        { status: 409 },
+      );
+    }
 
     const user = await db.attendee.create({
       data: {
@@ -37,8 +37,15 @@ export async function POST(
     const event = await db.event.findUnique({
       where: { id: params.eventId },
     });
+
+    if (!event || !user) {
+      return NextResponse.json(
+        { message: "Insufficient data." },
+        { status: 404 },
+      );
+    }
     await db.attendance.create({
-      data: { attendeeId: user.id, eventId: event?.id },
+      data: { attendeeId: user.id, eventId: event.id },
     });
     const emailVerificationResponse = await sendEmail({
       toEmail: email,
@@ -63,6 +70,6 @@ export async function POST(
     );
   } catch (error) {
     console.log(error);
-    return NextResponse.json({ message: "Error", error }, { status: 500 });
+    return NextResponse.json({ message: error.toString() }, { status: 500 });
   }
 }
