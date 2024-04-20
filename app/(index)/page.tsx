@@ -9,13 +9,21 @@ export async function generateMetadata() {
   const event = await getCurrentEvent();
   return {
     title: {
-      default: "PES Events",
+      default: event?.title,
       template: `%s | ${event?.title}`,
     },
     description: event?.description || "PES Events",
     alternates: {
       canonical: "/",
     },
+    socialBanner: "/poster.jpeg",
+    twitter: "https://twitter.com/PrivateEquityAF",
+    facebook: "https://www.facebook.com/privateequityea/",
+    youtube: "https://www.youtube.com/@PrivateEquitySupport/",
+    linkedin: "https://linkedin.com/company/privateequityaf",
+    instagram: "https://www.instagram.com/privateequityaf/",
+    siteUrl: "https://events.privateequity-support.com", // your website URL
+    siteLogo: "/events-logo.png",
   };
 }
 
