@@ -32,8 +32,8 @@ export default function NavbarRoutes({ user }: Props) {
 
           {!isDashboard && (
             <ul className="flex items-center">
-              <li className="mr-4">
-                <p className="relative block w-fit cursor-pointer after:absolute after:block after:h-[3px] after:w-full after:origin-left after:scale-x-0 after:bg-pes-red after:transition after:duration-300 after:content-[''] hover:text-pes-red after:hover:scale-x-100">
+              <li className="">
+                <p className="text-pes-red text-xl font-semibold">
                   PES Events
                 </p>
               </li>
