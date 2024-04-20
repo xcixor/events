@@ -20,7 +20,6 @@ const envSchema = zod.object({
   SERVICE_ID: zod.string().min(1),
   DEFAULT_TEMPLATE_ID: zod.string().min(1),
   PUBLIC_KEY: zod.string().min(1),
-  DEFAULT_FROM_NAME: zod.string().min(1),
   PRIVATE_KEY: zod.string().min(1),
 });
 
