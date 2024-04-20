@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
+import { Loader2 } from "lucide-react";
 
 type Props = {
   eventId: string;
@@ -34,7 +35,6 @@ const Registration = ({ eventId }: Props) => {
       message: "You must accept the terms and conditions",
     }),
   });
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -44,6 +44,7 @@ const Registration = ({ eventId }: Props) => {
       terms: false,
     },
   });
+  const { isSubmitting, isValid } = form.formState;
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const res = await fetch(`/api/events/registration/${eventId}`, {
@@ -156,7 +157,11 @@ const Registration = ({ eventId }: Props) => {
           variant="secondary"
           className="bg-pes-blue font-semibold text-primary text-white hover:bg-pes-red"
         >
-          Registration
+          {isSubmitting ? (
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          ) : (
+            "Register"
+          )}
         </Button>
       </form>
     </Form>
