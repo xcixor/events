@@ -9,8 +9,8 @@ export async function generateMetadata() {
   const event = await getCurrentEvent();
   return {
     title: {
-      default: event?.title,
-      template: `%s | ${event?.title}`,
+      default: event?.title ?? "Default Title",
+      template: `%s | ${event?.title ?? "Default Title"}`,
     },
     description: event?.description || "PES Events",
     alternates: {
@@ -22,14 +22,14 @@ export async function generateMetadata() {
     youtube: "https://www.youtube.com/@PrivateEquitySupport/",
     linkedin: "https://linkedin.com/company/privateequityaf",
     instagram: "https://www.instagram.com/privateequityaf/",
-    siteUrl: "https://events.privateequity-support.com", // your website URL
+    siteUrl: "https://events.privateequity-support.com",
     siteLogo: "/events-logo.png",
     ogImage: "/poster.jpeg",
     ogUrl: "https://events.privateequity-support.com/",
     author: "Private Equity support",
     robots: "index, follow",
-    ogTitle: event?.title,
-    keywords: ["PES", "Events", "Private Equity", event.title, "#CyberHygiene"],
+    ogTitle: event?.title ?? "Default Title",
+    keywords: ["PES", "Events", "Private Equity", event?.title ?? "Default Title", "#CyberHygiene"],
   };
 }
 
