@@ -24,6 +24,12 @@ export async function generateMetadata() {
     instagram: "https://www.instagram.com/privateequityaf/",
     siteUrl: "https://events.privateequity-support.com", // your website URL
     siteLogo: "/events-logo.png",
+    ogImage: "/poster.jpeg",
+    ogUrl: "https://events.privateequity-support.com/",
+    author: "Private Equity support",
+    robots: "index, follow",
+    ogTitle: event?.title,
+    keywords: ["PES", "Events", "Private Equity", event.title, "#CyberHygiene"],
   };
 }
 
