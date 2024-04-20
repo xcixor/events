@@ -29,11 +29,12 @@ const Registration = ({ eventId }: Props) => {
   const { toast } = useToast();
   const formSchema = z.object({
     name: z.string().min(2, "Please provide your name"),
-    phoneNumber: z.string().min(2, "Please provide your name"),
+    phoneNumber: z.string().min(2, "Please provide your phone number"),
     email: z.string().email("Please provide a valid email address"),
     terms: z.boolean().refine((val) => val, {
       message: "You must accept the terms and conditions",
     }),
+    company:z.string().min(2, "Which company are you from?"),
   });
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -42,6 +43,7 @@ const Registration = ({ eventId }: Props) => {
       phoneNumber: "",
       email: "",
       terms: false,
+      company:""
     },
   });
   const { isSubmitting, isValid } = form.formState;
@@ -108,9 +110,24 @@ const Registration = ({ eventId }: Props) => {
             name="phoneNumber"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>How can we contact you</FormLabel>
+                <FormLabel>How can we contact you?</FormLabel>
                 <FormControl>
                   <Input placeholder="+254 712 345 678" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <div className="flex-1">
+          <FormField
+            control={form.control}
+            name="company"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Name of your organization</FormLabel>
+                <FormControl>
+                  <Input placeholder="Organization Name" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

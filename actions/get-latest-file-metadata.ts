@@ -15,6 +15,9 @@ function getSignedUrlExpiryDate(signedUrl) {
 }
 
 export async function getLatestFileMetaData(assetId: string) {
+  if(!assetId){
+    return;
+  }
   const metaData = await db.gCPData.findFirst({
     where: {
       assetId: assetId,

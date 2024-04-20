@@ -1,17 +1,15 @@
 import { db } from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
-import bcrypt from "bcrypt";
 import { sendEmail } from "@/lib/email";
-import { EMAILTYPES } from "@/constants";
 
 export async function POST(
   req: NextRequest,
   { params }: { params: { eventId: string } },
 ) {
   try {
-    const { name, email, phoneNumber } = await req.json();
+    const { name, email, phoneNumber, company } = await req.json();
 
-    if (!name || !email || !phoneNumber) {
+    if (!name || !email || !phoneNumber || !company) {
       return NextResponse.json(
         { message: "All fields are required." },
         { status: 400 },
@@ -32,6 +30,7 @@ export async function POST(
         name,
         email,
         phoneNumber,
+        company
       },
     });
     const event = await db.event.findUnique({

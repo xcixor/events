@@ -33,7 +33,7 @@ export default async function Index() {
           <div className="flex-1">
             <Event />
           </div>
-          <div className="flex-1 p-8 md:p-0">
+          <div className="flex-1 p-8 md:p-4">
             <Registration eventId={event?.id} />
           </div>
         </div>
