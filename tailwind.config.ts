@@ -1,6 +1,5 @@
-
 /** @type {import('tailwindcss').Config} */
-module.exports = withUt({
+module.exports = {
   darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
@@ -18,9 +17,9 @@ module.exports = withUt({
     },
     extend: {
       colors: {
-        'pes-red': '#A31A2A',
-        'pes-blue': '#4B6386',
-        'pes-light-blue': '#A6C2D0',
+        "pes-red": "#A31A2A",
+        "pes-blue": "#4B6386",
+        "pes-light-blue": "#A6C2D0",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -80,10 +79,5 @@ module.exports = withUt({
       },
     },
   },
-  plugins: [
-    require("tailwindcss-animate"),
-    require("@vidstack/react/tailwind.cjs")({
-      prefix: "media",
-    }),
-  ],
-});
+  plugins: [require("tailwindcss-animate")],
+};
