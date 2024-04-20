@@ -29,7 +29,14 @@ export async function generateMetadata() {
     author: "Private Equity support",
     robots: "index, follow",
     ogTitle: event?.title ?? "Default Title",
-    keywords: ["PES", "Events", "Private Equity", event?.title ?? "Default Title", "#CyberHygiene"],
+    keywords: [
+      "PES",
+      "Events",
+      "Private Equity",
+      event?.title ?? "Default Title",
+      "#CyberHygiene",
+      "#CyberHygiene4SMEs",
+    ],
   };
 }
 
