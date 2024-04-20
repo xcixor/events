@@ -10,7 +10,7 @@ const Event = (props: Props) => {
         width={600}
         height={600}
         alt="PES Academy logo"
-        className="h-[500px] w-full bg-slate-50"
+        className="h-auto max-h-[500px] w-full bg-slate-50"
       />
     </div>
   );

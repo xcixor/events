@@ -20,16 +20,14 @@ const Footer = () => {
   return (
     <footer className="w-full bg-primary text-white">
       <div className="mx-auto max-w-7xl px-8 py-12">
-        <div className="mb-3 md:grid gap-10 md:grid-cols-2 lg:gap-20">
+        <div className="mb-3 gap-10 md:grid md:grid-cols-2 lg:gap-20">
           <div className="">
-            <Logo/>
+            <Logo />
             <p className="my-4 text-xs leading-normal">
-              At PES Academy, we offer a comprehensive catalog of courses
-              designed to cater to every skill level — from enthusiastic
-              beginners to seasoned professionals. Each course is meticulously
-              crafted to bridge knowledge gaps and enhance your skill set,
-              ensuring you&apos;re equipped to meet the challenges of
-              today&apos;s dynamic work environment.
+              Private Equity Support (PES) is an enterprise support advisory
+              consulting firm based in Nairobi, Kenya. Our mission is to
+              successfully originate, de-risk, structure, and support Early
+              Stage Financing (SME Investment) in Sub-Saharan Africa.
             </p>
           </div>
           <nav className="">

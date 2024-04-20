@@ -26,14 +26,14 @@ export default async function Index() {
     <MaxWidthWrapper>
       <main className="flex flex-col ">
         <div className="space-y-4 bg-slate-100 p-4">
-          <h1 className="text-3xl">{event?.title}</h1>
-          <p>{event?.description}</p>
+          <h1 className="text-2xl md:text-3xl">{event?.title}</h1>
+          <p className="text-[0.9rem] md:text-lg">{event?.description}</p>
         </div>
         <div className="items-center justify-between gap-8 md:flex">
           <div className="flex-1">
             <Event />
           </div>
-          <div className="flex-1 md:p-0 p-8">
+          <div className="flex-1 p-8 md:p-0">
             <Registration eventId={event?.id} />
           </div>
         </div>
