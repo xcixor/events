@@ -62,7 +62,7 @@ model Attendee {
   name        String
   email       String
   phoneNumber String
-  company     String
+  company     String?
 }
 
 model Attendance {
