@@ -25,24 +25,24 @@ export async function POST(
       );
     }
 
-    const user = await db.attendee.create({
-      data: {
-        name,
-        email,
-        phoneNumber,
-        company
-      },
-    });
     const event = await db.event.findUnique({
       where: { id: params.eventId },
     });
 
-    if (!event || !user) {
+    if (!event) {
       return NextResponse.json(
         { message: "Insufficient data." },
         { status: 404 },
       );
     }
+    const user = await db.attendee.create({
+      data: {
+        name,
+        email,
+        phoneNumber,
+        company,
+      },
+    });
     await db.attendance.create({
       data: { attendeeId: user.id, eventId: event.id },
     });
