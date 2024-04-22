@@ -1,32 +1,59 @@
 "use client";
 import React from "react";
 import { hasCookie, setCookie } from "cookies-next";
+import Link from "next/link";
 
-const CookieConsent = (props) => {
-  const [showConsent, setShowConsent] = React.useState(true);
+const CookieConsent = () => {
+  const [showConsent, setShowConsent] = React.useState(false);
 
   React.useEffect(() => {
-    setShowConsent(hasCookie("localConsent"));
+    // Check if the cookie consent is already given (for any type)
+    setShowConsent(!hasCookie("localConsent"));
   }, []);
 
-  const acceptCookie = () => {
-    setShowConsent(true);
-    setCookie("localConsent", "true", {});
+  const acceptAllCookies = () => {
+    // Set a cookie to indicate all cookies are accepted
+    setCookie("localConsent", "all", { path: "/" });
+    setShowConsent(false);
   };
 
-  if (showConsent) {
+  const acceptNecessaryCookies = () => {
+    // Set a cookie to indicate only necessary cookies are accepted
+    setCookie("localConsent", "necessary", { path: "/" });
+    setShowConsent(false);
+  };
+
+  if (!showConsent) {
     return null;
   }
 
   return (
     <div className="fixed inset-0 bg-slate-700 bg-opacity-70">
-      <div className="fixed bottom-0 left-0 right-0 flex items-center justify-between px-4 py-8 bg-gray-100">
-        <span className="text-dark text-base mr-16">
-          PES Academy uses cookies to improve user experience. By using our website you consent to all cookies in accordance with our Cookie Policy.
+      <div className="fixed bottom-0 left-0 right-0 flex items-center justify-between bg-gray-100 px-4 py-8">
+        <span className="text-dark mr-16 text-base">
+          PES uses cookies to improve user experience. By using our
+          website, you consent to all cookies in accordance with our
+          <Link
+            href="/privacy"
+            className="font-semibold text-pes-blue hover:text-pes-red"
+          >
+            &nbsp;Cookie Policy.
+          </Link>
         </span>
-        <button className="bg-pes-blue py-2 px-8 rounded text-white" onClick={() => acceptCookie()}>
-          Accept
-        </button>
+        <div>
+          <button
+            className="mr-4 rounded bg-pes-blue px-8 py-2 text-white hover:bg-green-600"
+            onClick={acceptAllCookies}
+          >
+            Accept all
+          </button>
+          <button
+            className="rounded bg-pes-red px-8 py-2 text-white hover:bg-green-600"
+            onClick={acceptNecessaryCookies}
+          >
+            Accept necessary cookies only
+          </button>
+        </div>
       </div>
     </div>
   );

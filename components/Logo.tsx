@@ -6,7 +6,7 @@ export const Logo = () => {
       className="h-[75px] w-auto bg-slate-50"
       height={110}
       width={130}
-      alt="PES Academy logo"
+      alt="PES Events logo"
       src="/events-logo.png"
     />
   );

@@ -4,9 +4,10 @@ import { UserCog2 } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Sign Up",
-  description: "Unlock a world of knowledge at PES Academy. Sign up today for transformative courses and take the first step toward mastering private equity.",
+  description:
+    "Unlock a world of knowledge at PES Events. Sign up today for transformative courses and take the first step toward mastering private equity.",
   alternates: {
-    canonical: 'https://academy.privateequity-support.com/auth/sign-up',
+    canonical: "https://academy.privateequity-support.com/auth/sign-up",
   },
 };
 

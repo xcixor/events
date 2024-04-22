@@ -9,7 +9,7 @@ const Event = (props: Props) => {
         src="/poster.jpeg"
         width={600}
         height={600}
-        alt="PES Academy logo"
+        alt="PES Events logo"
         className="h-auto max-h-[500px] w-full bg-slate-50"
       />
     </div>
