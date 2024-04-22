@@ -58,7 +58,7 @@ model Event {
 }
 
 model Attendee {
-  id          String @id @default(uuid())
+  id          String  @id @default(uuid())
   name        String
   email       String
   phoneNumber String
@@ -70,6 +70,12 @@ model Attendance {
   eventId String
 
   attendeeId String
+
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
+
+  timeSlot  String?
+  confirmed Boolean @default(false)
 
   @@unique([eventId, attendeeId])
 }

@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "Attendance" ADD COLUMN     "confirmed" BOOLEAN NOT NULL DEFAULT false,
+ADD COLUMN     "createdAt" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
+ADD COLUMN     "timeSlot" TEXT,
+ADD COLUMN     "updatedAt" TIMESTAMP(3);

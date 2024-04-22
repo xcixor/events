@@ -43,13 +43,29 @@ export async function POST(
         company,
       },
     });
-    await db.attendance.create({
+    const attendance = await db.attendance.create({
       data: { attendeeId: user.id, eventId: event.id },
     });
+    const attendances = await db.attendance.findMany({
+      where: { eventId: params.eventId },
+    });
+
+    let timeSlot;
+    if (attendances.length < 13) {
+      timeSlot = "10:00AM - 1:00PM";
+    } else {
+      timeSlot = "2:00PM - 5:00PM";
+    }
     const emailVerificationResponse = await sendEmail({
       toEmail: email,
       subject: "Registration Successful",
-      message: `Hello ${name}, your registration for ${event?.title} was recorded. Thank you for your continued support.`,
+      message: `Hello ${name}, your registration for ${event?.title} was recorded. See you on Wednesday the 24th from ${timeSlot}. \n\n Thank you for your continued support.`,
+    });
+    await db.attendance.update({
+      where: { id: attendance.id },
+      data: {
+        confirmed: true,
+      },
     });
     if (emailVerificationResponse.status === 200) {
       return NextResponse.json(
