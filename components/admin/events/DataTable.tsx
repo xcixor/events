@@ -23,6 +23,8 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import Link from "next/link";
+import { Plus } from "lucide-react";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -64,6 +66,16 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
+        <div className="flex items-center gap-4">
+          <Button onClick={() => table.resetGlobalFilter()}>
+            Reset all filters
+          </Button>
+          <Button>
+            <Link href="/dashboard/profile/admin/events/create">
+              <Plus className="h-4 w-4" />
+            </Link>
+          </Button>
+        </div>
       </div>
       <div className="rounded-md border">
         <Table>

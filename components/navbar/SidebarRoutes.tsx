@@ -35,43 +35,10 @@ const guestRoutes = [
   },
 ];
 
-const teacherRoutes = [
-  {
-    icon: List,
-    label: "Courses",
-    href: "/dashboard/teacher/courses",
-  },
-  {
-    icon: BarChart,
-    label: "Analytics",
-    href: "/dashboard/teacher/analytics",
-  },
-  {
-    icon: FolderCheck,
-    label: "Quizzes",
-    href: "/dashboard/teacher/quizzes",
-  },
-  {
-    icon: Users,
-    label: "Clients",
-    href: "/dashboard/teacher/clients",
-  },
-  {
-    icon: Album,
-    label: "Sessions",
-    href: "/dashboard/teacher/sessions",
-  },
-  {
-    icon: FileEdit,
-    label: "Document Review",
-    href: "/dashboard/teacher/document-review",
-  },
-];
-
 const adminRoutes = [
   {
     icon: Briefcase,
-    label: "Users",
+    label: "Events",
     href: "/dashboard/profile/admin/events",
   },
 ];
@@ -82,11 +49,7 @@ export default function SidebarRoutes() {
   const isTeacherPage = pathname?.includes("/teacher");
   const isAdminPage = pathname?.includes("/admin");
 
-  const routes = isTeacherPage
-    ? teacherRoutes
-    : isAdminPage
-      ? adminRoutes
-      : guestRoutes;
+  const routes = isAdminPage ? adminRoutes : guestRoutes;
 
   return (
     <div className="flex w-full flex-col">
