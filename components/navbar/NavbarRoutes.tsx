@@ -54,7 +54,7 @@ export default function NavbarRoutes({ user }: Props) {
             </Button>
           </Link>
         ) : user?.role === Role.ADMIN ? (
-          <Link href="/dashboard/admin/users">
+          <Link href="/dashboard/profile/admin/events">
             <Button size="sm" variant="outline" className="h-auto py-2">
               Admin Mode
             </Button>

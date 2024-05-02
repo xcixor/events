@@ -15,6 +15,7 @@ import {
   FileEditIcon,
   File,
   FileEdit,
+  Briefcase,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 
@@ -26,30 +27,11 @@ const guestRoutes = [
     label: "Dashboard",
     href: "/dashboard",
   },
-  {
-    icon: Compass,
-    label: "Browse",
-    href: "/dashboard/search",
-  },
-  {
-    icon: GraduationCap,
-    label: "Coaches",
-    href: "/dashboard/coaches",
-  },
+
   {
     icon: Album,
-    label: "Sessions",
-    href: "/dashboard/sessions",
-  },
-  {
-    icon: FileEditIcon,
-    label: "Document Review",
-    href: "/dashboard/document-review",
-  },
-  {
-    icon: UserCogIcon,
-    label: "Profile",
-    href: "/dashboard/profile",
+    label: "Events History",
+    href: "/previous-events",
   },
 ];
 
@@ -88,19 +70,9 @@ const teacherRoutes = [
 
 const adminRoutes = [
   {
-    icon: Users2,
+    icon: Briefcase,
     label: "Users",
-    href: "/dashboard/admin/users",
-  },
-  {
-    icon: Library,
-    label: "Courses",
-    href: "/dashboard/admin/courses",
-  },
-  {
-    icon: File,
-    label: "Document Review",
-    href: "/dashboard/admin/document-review",
+    href: "/dashboard/profile/admin/events",
   },
 ];
 

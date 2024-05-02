@@ -85,3 +85,14 @@ model Attendance {
 
   @@unique([eventId, attendeeId])
 }
+
+model GCPData {
+  id               String   @id @default(cuid())
+  urlExpiryDate    DateTime
+  blobName         String
+  assetId          String   @unique
+  assetName        String
+  assetType        String
+  validityDuration Int      @default(7)
+  downloadUrl      String
+}
