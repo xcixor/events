@@ -1,67 +1,36 @@
-import type { Metadata } from "next";
-import CookieConsent from "@/components/index/CookieBanner";
+import { getEventsWithImageData } from "@/actions/get-events-with-image-data";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
-import { getCurrentEvent } from "@/actions/get-current-event";
-import Event from "@/components/events/Event";
-import Registration from "@/components/registration/Registration";
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
 
-export async function generateMetadata() {
-  const event = await getCurrentEvent();
-  return {
-    title: {
-      default: event?.title ?? "PES Events",
-      template: `%s | ${event?.title ?? "PES Events"}`,
-    },
-    description: event?.description || "PES Events",
-    alternates: {
-      canonical: "/",
-    },
-    socialBanner: "https://storage.googleapis.com/pes_public/poster.jpeg",
-    siteUrl: "https://events.privateequity-support.com",
-    siteLogo: "https://storage.googleapis.com/pes_public/events-logo.png",
-    other: {
-      "twitter:image": "https://storage.googleapis.com/pes_public/poster.jpeg",
-      "twitter:handle": "@PrivateEquityAF",
-      "twitter:card": "summary_large_image",
-      "og:url": "https://events.privateequity-support.com/",
-      "og:image": "https://storage.googleapis.com/pes_public/poster.jpeg",
-      "og:type": "website",
-      "og:title": event?.title ?? "PES Events",
-      "og:description": event?.description || "PES Events",
-    },
-    author: "Private Equity support",
-    robots: "index, follow",
-    keywords: [
-      "PES",
-      "Events",
-      "Private Equity",
-      event?.title ?? "PES Events",
-      "#CyberHygiene",
-      "#CyberHygiene4SMEs",
-    ],
-  };
-}
+type Props = {};
 
-export default async function Index() {
-  const event = await getCurrentEvent();
-
+const page = async (props: Props) => {
+  const events = await getEventsWithImageData();
   return (
     <MaxWidthWrapper>
-      <main className="flex flex-col ">
-        <div className="space-y-4 bg-slate-100 p-4">
-          <h1 className="text-2xl md:text-3xl">{event?.title}</h1>
-          <p className="text-[0.9rem] md:text-lg">{event?.description}</p>
-        </div>
-        <div className="items-center justify-between gap-8 md:flex">
-          <div className="flex-1">
-            <Event />
-          </div>
-          <div className="flex-1 p-8 md:p-4">
-            <Registration eventId={event?.id} />
-          </div>
-        </div>
-        <CookieConsent />
-      </main>
+      <h1 className="py-4 text-3xl font-bold">PES Events</h1>
+      <div className="flex flex-col gap-4">
+        {events.map((event) => (
+          <Link href={`/pes-events/${event.slug}`} key={event.id}>
+            <div className="flex gap-2 p-8 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
+              <Image
+                src={event.image}
+                alt={event.title}
+                width={200}
+                height={200}
+              />
+              <div className="flex flex-col gap-2">
+                <h3 className="text-xl font-semibold">{event.title}</h3>
+                <p>{event.description}</p>
+              </div>
+            </div>
+          </Link>
+        ))}
+      </div>
     </MaxWidthWrapper>
   );
-}
+};
+
+export default page;
