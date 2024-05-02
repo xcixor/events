@@ -7,7 +7,7 @@ export async function POST(
   { params }: { params: { eventId: string } },
 ) {
   try {
-    const { name, email, phoneNumber, company } = await req.json();
+    let { name, email, phoneNumber, company, timeSlot } = await req.json();
 
     if (!name || !email || !phoneNumber || !company) {
       return NextResponse.json(
@@ -47,14 +47,16 @@ export async function POST(
       data: { attendeeId: user.id, eventId: event.id },
     });
     const attendances = await db.attendance.findMany({
-      where: { eventId: params.eventId },
+      where: { eventId: params.eventId, timeSlot: timeSlot },
     });
 
-    let timeSlot;
-    if (attendances.length < 13) {
-      timeSlot = "10:00AM - 1:00PM";
-    } else {
-      timeSlot = "2:00PM - 5:00PM";
+    if (attendances.length > 13) {
+      return NextResponse.json(
+        {
+          message: "That timeslot is overbooked, kindly select another.",
+        },
+        { status: 400 },
+      );
     }
     const emailVerificationResponse = await sendEmail({
       toEmail: email,

@@ -19,10 +19,22 @@ import { useToast } from "@/components/ui/use-toast";
 import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
 import { Loader2 } from "lucide-react";
+import Combobox from "@/components/ui/combobox";
 
 type Props = {
   eventId: string;
 };
+
+const timeSlots = [
+  {
+    label: "Group A 10am - 1pm",
+    value: "Morning",
+  },
+  {
+    label: "Group B 2pm - 5pm",
+    value: "Afternoon",
+  },
+];
 
 const Registration = ({ eventId }: Props) => {
   const router = useRouter();
@@ -34,7 +46,8 @@ const Registration = ({ eventId }: Props) => {
     terms: z.boolean().refine((val) => val, {
       message: "You must accept the terms and conditions",
     }),
-    company:z.string().min(2, "Which company are you from?"),
+    company: z.string().min(2, "Which company are you from?"),
+    timeSlot: z.string().min(2, "Which company are you from?"),
   });
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -43,7 +56,8 @@ const Registration = ({ eventId }: Props) => {
       phoneNumber: "",
       email: "",
       terms: false,
-      company:""
+      company: "",
+      timeSlot: "",
     },
   });
   const { isSubmitting, isValid } = form.formState;
@@ -113,6 +127,21 @@ const Registration = ({ eventId }: Props) => {
                 <FormLabel>How can we contact you?</FormLabel>
                 <FormControl>
                   <Input placeholder="+254 712 345 678" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <div>
+          <FormField
+            control={form.control}
+            name="timeSlot"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Which time slot works for you?</FormLabel>
+                <FormControl>
+                  <Combobox options={timeSlots} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
