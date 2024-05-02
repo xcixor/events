@@ -6,7 +6,13 @@ type Props = {};
 const page = (props: Props) => {
   return (
     <div className="p-6">
-      <CreateEventForm />
+      <CreateEventForm
+        title={""}
+        description={""}
+        isActive={false}
+        url="/api/admin/events"
+        method="POST"
+      />
     </div>
   );
 };

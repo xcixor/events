@@ -2,7 +2,7 @@
 
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { z } from "zod";
+import { boolean, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import {
@@ -20,7 +20,21 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Loader2 } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 
-const CreateEventForm = () => {
+type FormProps = {
+  title: string;
+  description: string;
+  isActive: boolean;
+  url: string;
+  method: string;
+};
+
+const CreateEventForm = ({
+  title,
+  description,
+  isActive,
+  url,
+  method,
+}: FormProps) => {
   const router = useRouter();
   const { toast } = useToast();
   const formSchema = z.object({
@@ -33,17 +47,17 @@ const CreateEventForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: "",
-      description: "",
-      isActive: false,
+      title: title,
+      description: description,
+      isActive: isActive,
     },
   });
   const { isSubmitting, isValid } = form.formState;
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      const res = await fetch(`/api/admin/events`, {
-        method: "POST",
+      const res = await fetch(url, {
+        method: method,
         headers: {
           "Content-Type": "application/json",
         },
@@ -87,10 +101,7 @@ const CreateEventForm = () => {
               <FormItem>
                 <FormLabel>Event Title</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="e.g cybersecurity training"
-                    {...field}
-                  />
+                  <Input placeholder="e.g cybersecurity training" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
