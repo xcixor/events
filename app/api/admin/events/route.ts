@@ -9,9 +9,10 @@ export async function POST(req: NextRequest) {
     if (!user) {
       return NextResponse.json({ message: "Unauthorized." }, { status: 401 });
     }
-    const { title, description, isActive } = await req.json();
+    const { title, description, isActive, startDate, endDate } =
+      await req.json();
 
-    if (!title || !description || !isActive) {
+    if (!title || !description || !isActive || !startDate || !endDate) {
       return NextResponse.json(
         { message: "All fields are required." },
         { status: 400 },
@@ -23,6 +24,8 @@ export async function POST(req: NextRequest) {
         title,
         description,
         isActive,
+        startDate,
+        endDate,
       },
     });
 

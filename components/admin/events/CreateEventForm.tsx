@@ -57,10 +57,10 @@ const CreateEventForm = ({
       message: "Do you want to publish this event?",
     }),
     startDate: z.date({
-      required_error: "A date of birth is required.",
+      required_error: "This field is required.",
     }),
     endDate: z.date({
-      required_error: "A date of birth is required.",
+      required_error: "This field is required.",
     }),
   });
   const form = useForm<z.infer<typeof formSchema>>({
