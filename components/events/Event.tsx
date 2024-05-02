@@ -1,15 +1,18 @@
 import Image from "next/image";
 
-type Props = {};
+type Props = {
+  imageUrl: string;
+  altText: string;
+};
 
-const Event = (props: Props) => {
+const Event = ({ imageUrl, altText }: Props) => {
   return (
     <div>
       <Image
-        src="/poster.jpeg"
+        src={imageUrl}
         width={600}
         height={600}
-        alt="PES Events logo"
+        alt={altText}
         className="h-auto max-h-[500px] w-full bg-slate-50"
       />
     </div>

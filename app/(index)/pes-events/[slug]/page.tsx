@@ -5,6 +5,8 @@ import { getCurrentEvent } from "@/actions/get-current-event";
 import Event from "@/components/events/Event";
 import Registration from "@/components/registration/Registration";
 import { getEventBySlug } from "@/actions/get-event-by-slug";
+import { notFound } from "next/navigation";
+import { getLatestFileMetaData } from "@/actions/get-latest-file-metadata";
 
 interface Props {
   params: {
@@ -52,6 +54,9 @@ export async function generateMetadata() {
 export default async function EventPage({ params }: Props) {
   const { slug } = params;
   const event = await getEventBySlug(slug);
+  if (!event) return notFound();
+
+  const imageMetatada = await getLatestFileMetaData(event?.id);
 
   return (
     <MaxWidthWrapper>
@@ -62,7 +67,10 @@ export default async function EventPage({ params }: Props) {
         </div>
         <div className="items-center justify-between gap-8 md:flex">
           <div className="flex-1">
-            <Event />
+            <Event
+              altText={event?.title}
+              imageUrl={imageMetatada?.downloadUrl || ""}
+            />
           </div>
           <div className="flex-1 p-8 md:p-4">
             <Registration eventId={event?.id} />
