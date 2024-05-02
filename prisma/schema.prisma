@@ -54,6 +54,7 @@ model Event {
   id          String  @id @default(uuid())
   title       String
   description String
+  slug        String?
   isActive    Boolean @default(false)
 
   createdAt DateTime? @default(now())

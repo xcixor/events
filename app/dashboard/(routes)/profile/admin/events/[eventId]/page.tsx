@@ -17,6 +17,7 @@ const page = async (props: Props) => {
   const gcpData = await getLatestFileMetaData(resource.id);
   return (
     <div className="h-full p-6">
+      <p>Event ID: {resource.slug}</p>
       <CreateEventForm
         title={resource.title}
         description={resource.description}

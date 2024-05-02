@@ -1,6 +1,6 @@
 import { db } from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
-import { sendEmail } from "@/lib/email";
+import slugify from "slugify";
 import { getLoggedInUser } from "@/lib/auth/utils";
 
 export async function POST(req: NextRequest) {
@@ -19,6 +19,21 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    let slug = slugify(title, { lower: true, strict: true });
+
+    const dateInstance = new Date(startDate);
+    const datePart = dateInstance.toISOString().split("T")[0];
+    slug += `-${datePart}`;
+
+    const duplicate = await db.event.findFirst({ where: { slug: slug } });
+
+    if (duplicate) {
+      return NextResponse.json(
+        { message: "That event already exists." },
+        { status: 409 },
+      );
+    }
+
     const event = await db.event.create({
       data: {
         title,
@@ -26,6 +41,7 @@ export async function POST(req: NextRequest) {
         isActive,
         startDate,
         endDate,
+        slug,
       },
     });
 
