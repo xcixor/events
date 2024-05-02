@@ -23,6 +23,8 @@ const page = async (props: Props) => {
         isActive={resource.isActive}
         url={`/api/admin/events/${resource.id}`}
         method="PATCH"
+        startDate={resource.startDate}
+        endDate={resource.endDate}
       />
       <EventPosterForm
         initialData={resource}
