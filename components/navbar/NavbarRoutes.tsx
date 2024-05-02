@@ -33,9 +33,12 @@ export default function NavbarRoutes({ user }: Props) {
           {!isDashboard && (
             <ul className="flex items-center">
               <li className="">
-                <p className="text-pes-red text-xl font-semibold">
+                <Link
+                  href="/previous-events"
+                  className="text-xl font-semibold text-pes-red"
+                >
                   PES Events
-                </p>
+                </Link>
               </li>
             </ul>
           )}
