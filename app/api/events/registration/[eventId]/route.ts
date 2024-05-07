@@ -61,7 +61,7 @@ export async function POST(
     const emailVerificationResponse = await sendEmail({
       toEmail: email,
       subject: "Registration Successful",
-      message: `Hello ${name}, your registration for ${event?.title} was recorded. See you on Wednesday the 24th from ${timeSlot}. \n\n Thank you for your continued support.`,
+      message: `Hello ${name}, your registration for ${event?.title} was recorded. See you on Thursday the 9th in the ${timeSlot}. \n\n Thank you for your continued support.`,
     });
     await db.attendance.update({
       where: { id: attendance.id },
