@@ -26,6 +26,7 @@ const page = async (props: Props) => {
           <p>{attendee.company}</p>
         </div>
       ))}
+      <h3 className="text-xl font-semibold">Total: {attendees.length}</h3>
     </div>
   );
 };
