@@ -31,7 +31,7 @@ const ExportToExcel = ({ data }: Props) => {
   };
   return (
     <div>
-      <Button onClick={exportToExcel}>Export to Excel</Button>
+      <Button onClick={exportToExcel}>Export as Excel</Button>
     </div>
   );
 };

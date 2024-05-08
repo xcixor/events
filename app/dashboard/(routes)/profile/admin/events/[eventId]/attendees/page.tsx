@@ -29,6 +29,7 @@ const page = async (props: Props) => {
         </div>
       ))}
       <h3 className="text-xl font-semibold">Total: {attendees.length}</h3>
+      <ExportToExcel data={attendees} />
     </div>
   );
 };
