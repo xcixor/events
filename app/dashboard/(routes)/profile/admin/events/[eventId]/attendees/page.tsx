@@ -16,14 +16,14 @@ const page = async (props: Props) => {
       {attendees.map((attendee) => (
         <div
           key={attendee.id}
-          className={cn("flex gap-2 bg-slate-100 p-4", {
+          className={cn("flex justify-between bg-slate-100 p-4", {
             "bg-slate-300": attendees.indexOf(attendee) % 2 !== 0,
           })}
         >
-          <p>{attendee.name}</p>
-          <p>{attendee.email}</p>
-          <p>{attendee.phoneNumber}</p>
-          <p>{attendee.company}</p>
+          <p className="flex-1">{attendee.name}</p>
+          <p className="flex-1">{attendee.email}</p>
+          <p className="flex-1">{attendee.phoneNumber}</p>
+          <p className="flex-1">{attendee.company}</p>
         </div>
       ))}
       <h3 className="text-xl font-semibold">Total: {attendees.length}</h3>
