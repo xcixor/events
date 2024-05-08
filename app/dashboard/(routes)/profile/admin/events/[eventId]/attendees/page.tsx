@@ -1,4 +1,5 @@
 import { getEventAttendees } from "@/actions/admin/get-event-attendees";
+import ExportToExcel from "@/components/admin/events/ExportToExcel";
 import { cn } from "@/lib/utils";
 import React from "react";
 
@@ -27,6 +28,7 @@ const page = async (props: Props) => {
         </div>
       ))}
       <h3 className="text-xl font-semibold">Total: {attendees.length}</h3>
+      <ExportToExcel data={attendees} />
     </div>
   );
 };

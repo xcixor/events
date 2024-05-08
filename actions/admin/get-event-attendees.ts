@@ -8,7 +8,6 @@ export const getEventAttendees = async (id: string) => {
       },
     });
 
-    
     const attendees = [];
     for (const attendance of attendances) {
       const attendee = await db.attendee.findFirst({
