@@ -14,6 +14,7 @@ const page = async (props: Props) => {
   return (
     <div className="space-y-4 p-6">
       <h1 className="text-2xl">Attendees</h1>
+      <ExportToExcel data={attendees} />
       {attendees.map((attendee) => (
         <div
           key={attendee.id}
@@ -28,7 +29,6 @@ const page = async (props: Props) => {
         </div>
       ))}
       <h3 className="text-xl font-semibold">Total: {attendees.length}</h3>
-      <ExportToExcel data={attendees} />
     </div>
   );
 };
