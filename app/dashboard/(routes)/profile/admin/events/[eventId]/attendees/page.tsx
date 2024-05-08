@@ -22,6 +22,8 @@ const page = async (props: Props) => {
         >
           <p>{attendee.name}</p>
           <p>{attendee.email}</p>
+          <p>{attendee.phoneNumber}</p>
+          <p>{attendee.company}</p>
         </div>
       ))}
     </div>
