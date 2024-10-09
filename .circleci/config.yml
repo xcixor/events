@@ -30,7 +30,7 @@ commands:
 jobs:
   test_events:
     machine:
-      image: ubuntu-2004:202201-02
+      image: ubuntu-2204:2024.05.1
     working_directory: ~/events
     steps:
       - checkout
@@ -41,7 +41,7 @@ jobs:
             make ci-test
   push_service_image:
     machine:
-      image: ubuntu-2004:202201-02
+      image: ubuntu-2204:2024.05.1
     working_directory: ~/events
     steps:
       - checkout
@@ -56,7 +56,7 @@ jobs:
             docker-push -f deploy/build.config
   deploy_service_cloud_run:
     machine:
-      image: ubuntu-2004:202201-02
+      image: ubuntu-2204:2024.05.1
     parameters:
       environment:
         description: "The environment where to deploy the application"
