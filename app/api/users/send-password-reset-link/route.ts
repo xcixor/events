@@ -1,7 +1,7 @@
 import { db } from "@/lib/db";
 import { sendEmail } from "@/lib/email";
-import { EMAILTYPES } from "@/constants";
 import { NextRequest, NextResponse } from "next/server";
+import { env } from "@/lib/env";
 
 export async function POST(req: NextRequest) {
   const toEmail = req.nextUrl.searchParams.get("toEmail");
@@ -11,7 +11,10 @@ export async function POST(req: NextRequest) {
       { status: 500 },
     );
   }
-  const user = await db.user.findUnique({ where: { email: toEmail } });
+  const user = await db.user.findUnique({
+    where: { email: toEmail },
+    include: { profile: true },
+  });
   if (!user) {
     return NextResponse.json(
       { message: "No account was found with that email" },
@@ -20,16 +23,18 @@ export async function POST(req: NextRequest) {
   }
   try {
     const toEmail = user.email;
-    const emailType = EMAILTYPES.RESETPASSWORD;
-    const userId = user.id;
-    const extraArgs = {
-      userId: userId,
-    };
 
+    const passwordResetLink = `${env.BASE_DOMAIN}/auth/reset-password?email=${toEmail}`;
+    const message = `Hello ${user.profile?.firstName} ${user.profile?.lastName}, <br/> <br/>
+    You are receiving this email because we received a password reset request for your account. <br/>
+    If you did not request a password reset, please ignore this email. <br/> <br/>
+    Click the link below to reset your password. <br/>
+    <a href="${passwordResetLink}">Reset Password</a> <br/>
+    `;
     const emailVerificationResponse = await sendEmail({
       to_email: toEmail,
-      emailType: emailType,
-      extraArgs: extraArgs,
+      message,
+      subject: "PES Academy - Email Verification",
     });
 
     if (emailVerificationResponse.status === 200) {
