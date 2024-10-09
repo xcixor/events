@@ -21,6 +21,12 @@ const envSchema = zod.object({
   DEFAULT_TEMPLATE_ID: zod.string().min(1),
   PUBLIC_KEY: zod.string().min(1),
   PRIVATE_KEY: zod.string().min(1),
+
+  // oauth
+  CLIENT_ID: zod.string().min(1, "Please provide CLIENT_ID"),
+  CLIENT_SECRET: zod.string().min(1, "Please provide CLIENT_SECRET"),
+  REFRESH_TOKEN: zod.string().min(1, "Please provide REFRESH_TOKEN"),
+  SMTP_AUTH_USER: zod.string().min(1, "Please provide SMTP_AUTH_USER"),
 });
 
 export const env = envSchema.parse(process.env);

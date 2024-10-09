@@ -1,5 +1,5 @@
 import { db } from "@/lib/db";
-import { sendEmail } from "@/lib/email/mailer";
+import { sendEmail } from "@/lib/email";
 import { EMAILTYPES } from "@/constants";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
     };
 
     const emailVerificationResponse = await sendEmail({
-      toEmail: toEmail,
+      to_email: toEmail,
       emailType: emailType,
       extraArgs: extraArgs,
     });
