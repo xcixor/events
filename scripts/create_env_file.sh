@@ -22,6 +22,12 @@ create_env_file() {
     echo "DEFAULT_TEMPLATE_ID=${DEFAULT_TEMPLATE_ID}" >> .env
     echo "BASE_DOMAIN=${BASE_DOMAIN}" >> .env
 
+    # oauth2
+    echo "CLIENT_ID=${CLIENT_ID}" >> .env
+    echo "CLIENT_SECRET=${CLIENT_SECRET}" >> .env
+    echo "REFRESH_TOKEN=${REFRESH_TOKEN}" >> .env
+    echo "SMTP_AUTH_USER=${SMTP_AUTH_USER}" >> .env
+
 }
 main(){
     create_env_file
