@@ -104,6 +104,9 @@ dependencies:
   eslint-config-prettier:
     specifier: ^9.0.0
     version: 9.1.0(eslint@8.56.0)
+  googleapis:
+    specifier: ^144.0.0
+    version: 144.0.0
   file-saver:
     specifier: ^2.0.5
     version: 2.0.5
